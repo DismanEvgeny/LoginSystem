@@ -7,8 +7,11 @@
 #define SEPARATOR	"/"
 #endif // _WIN32
 
+// Global
 #define DIRNAME		"db"
-// #define FULLDIR		SEPARATOR + DIRNAME
+#define PASSWORD_INPUT_RETRIES		2
+
+// Test users
 #define TESTUSR1	"admin"
 #define TESTUSR2	"user"
 #define TESTPSSWD1	"admin"

@@ -71,11 +71,42 @@ string get_password_from_user() {
 	return ipt;
 }
 
+bool compare_passwords(string username, string password) {
+	bool result{};
+	string password_from_file{ get_password_from_file(username) };
+
+	return password == password_from_file;
+}
+
 // login user
 int login()
 {
+	string username{}, password{};
+	bool success{false};
+	// int rc{ 0 };
+	cout << "Username:\t";
+	getline(cin, username);
+
+	if (!user_exists(username)) {
+		cout << "User " << username << " doesn't exist.\n";
+		return RC_USER_DOESNT_EXIST;
+	}
+
+	for (int i = 0; i < PASSWORD_INPUT_RETRIES; i++) {
+		cout << "Password:\t";
+		password = get_password_from_user();
+		if (compare_passwords(username, password)) {
+			success = true;
+			break;
+		}
+	}
+	if (!success) {
+		return RC_PASSWORDS_DONT_MATCH;
+	}
+
 	return 0;
 }
+
 
 // register user
 int register_user()

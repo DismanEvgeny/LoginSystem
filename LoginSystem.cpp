@@ -30,20 +30,42 @@ int main()
 
 	char inp{};
 	bool quit{ false };
+	string result{};
+	int rc{};
 	cout << "___________________ Login System ___________________\nLogin(L), Register(r) or Exit(e) ? : \t";
 	while (!quit) {
 		quit = true;
 		inp = getchar();
 		cin.ignore();
+
 		switch (inp)
 		{
 		case 'l':
-			login();
+			rc = login();
+			if ( rc != 0) {
+				result.assign("Login failed. RC = " + rc);
+			}
+			else {
+				result.assign("Login succeed!");
+			};
 			break;
+
 		case 'r':
-			register_user();
+			rc = register_user();
+			if (rc != 0) {
+				result.assign("Registrtion failed. RC = " + rc);
+			}
+			else {
+				result.assign("Registrtion completed normally.");
+			};
 			break;
+
 		case 'e':
+			result.assign("Goodbye!");
+			quit = true;
+			break;
+		case 'q':
+			result.assign("Goodbye!");
 			quit = true;
 			break;
 		default:
@@ -53,6 +75,8 @@ int main()
 		}
 
 	}
+
+	cout << result << endl;
 
 	return 0;
 }

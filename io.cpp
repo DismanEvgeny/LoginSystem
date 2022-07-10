@@ -22,3 +22,21 @@ int create_user_file(std::string username, std::string password)
 	user_file.close();
 	return 0;
 }
+
+string get_password_from_file(string username)
+{
+	auto filename{ filesystem::current_path() };
+	filename.append(DIRNAME).append(username);
+	ifstream user_file(filename);
+	string line{};
+	bool isPsswd{ false };
+	while (getline(user_file, line)) {
+		if (isPsswd) {
+			break;
+		}
+		isPsswd = true;
+	}
+
+	user_file.close();
+	return line;
+}
