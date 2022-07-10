@@ -1,6 +1,7 @@
 #pragma once
 
 #include "io.h"
+#include <Windows.h>
 
 int register_user();
 
