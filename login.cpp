@@ -113,6 +113,7 @@ int register_user()
 {
 	string username{}, password{}, password_for_check{};
 	bool check{false};
+	int rc{0};
 
 	// Get username from input + check it
 	while (!check)
@@ -138,23 +139,24 @@ int register_user()
 	}
 
 	// register user
-	register_user(username, password);
+	rc = register_user(username, password);
 
-	return 0;
+	return rc;
 }
 
 // register user with predefined name and password
 int register_user(string username, string password)
 {
+	int rc{ 0 };
 	if (user_exists(username)) {
 		return RC_USER_EXISTS;
 	}
 
 	//	TODO 
 	// encrypt password
-	create_user_file(username, password);
+	rc = create_user_file(username, password);
 
-	return 0;
+	return rc;
 }
 
 // check if user exists

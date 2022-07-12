@@ -8,8 +8,10 @@
 #endif // _WIN32
 
 // Global
-#define DIRNAME		"db"
+#define DB_DIRNAME		"db"
+#define	CONF_DIRNAME	"conf"
 #define PASSWORD_INPUT_RETRIES		2
+#define CONFIG_FILE_NAME	"login.conf"
 
 // Test users
 #define TESTUSR1	"admin"
@@ -27,3 +29,9 @@
 #define PASSWORD_RESTRICTED_CHARS	USERNAME_RESTRICTED_CHARS
 #define PASSWORD_MIN_LENGTH			1
 #define	PASSWORD_MAX_LENGTH			32
+
+// Configuration options and defaults
+#define CONF_ENCRYPTION_OPT				"ENCRYPTION_OPT"
+#define CONF_ENCRYPTION_OPT_NOECNRYPT	0
+#define CONF_ENCRYPTION_OPT_SIMPLE		1
+#define CONF_ENCRYPTION_OPT_DEFAULT		CONF_ENCRYPTION_OPT_SIMPLE

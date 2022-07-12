@@ -128,14 +128,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Configuration.cpp" />
+    <ClCompile Include="crypt.cpp" />
     <ClCompile Include="io.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="LoginSystem.cpp" />
+    <ClCompile Include="maint.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Configuration.h" />
+    <ClInclude Include="crypt.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="io.h" />
     <ClInclude Include="login.h" />
+    <ClInclude Include="maint.h" />
     <ClInclude Include="rc.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
