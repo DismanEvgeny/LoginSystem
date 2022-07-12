@@ -1,6 +1,5 @@
 #include "maint.h"
 
-static Configuration configuration{};
 
 bool check_startup()
 {
@@ -20,17 +19,18 @@ bool check_startup()
 		check = create_conf_file() == 0;
 	}
 	else if(conf_file_exists()) {
-		// path exists but no conf file 
+		// path exists but no conf file
 		check = create_conf_file() == 0;
 	}
 	else {
-		// both path and conf file exist
-
+		check = check_configuration();
 	}
 
-	if (check) {
-		configuration = load_conf_file();
+	if (!check) {
+		return check;
 	}
+
+	configuration = load_conf_file();
 
 	// db path check
 	path_exists = filesystem::exists(db_path);
@@ -56,15 +56,16 @@ int start() {
 	bool quit{ false };
 	string result{};
 	int rc{};
-	cout << "___________________ Login System ___________________\nLogin(L), Register(r) or Exit(e) ? : \t";
+	cout << "___________________ Login System ___________________\n";
 	while (!quit) {
-		quit = true;
+		cout << "Login(L), Register(r) or Exit(e) ? : \t";
 		inp = getchar();
 		cin.ignore();
-
+		clear_console();
 		switch (inp)
 		{
 		case 'l':
+			cout << "\t\tLOGIN\n";
 			rc = login();
 			if (rc != 0) {
 				result.assign("Login failed. RC = " + rc);
@@ -75,6 +76,7 @@ int start() {
 			break;
 
 		case 'r':
+			cout << "\t\tREGISTRATION\n";
 			rc = register_user();
 			if (rc != 0) {
 				result.assign("Registrtion failed. RC = " + rc);
@@ -98,11 +100,22 @@ int start() {
 			break;
 		}
 
+		cout << endl << result << endl << endl;
+
+
 	}
 
-	cout << endl << result << endl;
-
 	return 0;
+}
+
+void clear_console() {
+#ifdef UNIX_OS
+	cout << "\x1B[2J\x1B[H";
+#endif // UNIX_OS
+
+#ifdef _WIN32
+	system("cls");
+#endif // _WIN32
 }
 
 
@@ -111,8 +124,8 @@ int start() {
 *		Private functions
 * 
 */
-int check_configuration() {
-	int rc{ 0 };
+bool check_configuration() {
+	bool rc{ true };
 
 
 

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "login.h"
+#include "crypt.h"
 using namespace std;
 
 bool check_username(string username) {
@@ -74,7 +75,7 @@ string get_password_from_user() {
 bool compare_passwords(string username, string password) {
 	bool result{};
 	string password_from_file{ get_password_from_file(username) };
-
+	password = encrypt(password);
 	return password == password_from_file;
 }
 
@@ -152,8 +153,7 @@ int register_user(string username, string password)
 		return RC_USER_EXISTS;
 	}
 
-	//	TODO 
-	// encrypt password
+	password = encrypt(password);
 	rc = create_user_file(username, password);
 
 	return rc;

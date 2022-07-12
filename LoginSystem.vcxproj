@@ -130,14 +130,19 @@
   <ItemGroup>
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="crypt.cpp" />
+    <ClCompile Include="decrypt.cpp" />
+    <ClCompile Include="encrypt.cpp" />
     <ClCompile Include="io.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="LoginSystem.cpp" />
     <ClCompile Include="maint.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="conf.h" />
     <ClInclude Include="Configuration.h" />
     <ClInclude Include="crypt.h" />
+    <ClInclude Include="decrypt.h" />
+    <ClInclude Include="encrypt.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="io.h" />
     <ClInclude Include="login.h" />
