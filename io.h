@@ -15,3 +15,5 @@ bool conf_file_exists();
 int create_conf_file();
 
 Configuration load_conf_file();
+
+void clear_console();

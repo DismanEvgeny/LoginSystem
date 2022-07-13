@@ -16,6 +16,3 @@ bool check_startup();
 int start();
 
 bool check_configuration();
-
-
-void clear_console();

@@ -108,15 +108,7 @@ int start() {
 	return 0;
 }
 
-void clear_console() {
-#ifdef UNIX_OS
-	cout << "\x1B[2J\x1B[H";
-#endif // UNIX_OS
 
-#ifdef _WIN32
-	system("cls");
-#endif // _WIN32
-}
 
 
 /*
