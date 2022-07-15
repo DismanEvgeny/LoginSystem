@@ -1,12 +1,6 @@
 #pragma once
 #include "rc.h"
 
-#ifdef _WIN32
-#define SEPARATOR	"\\"		
-#elif 
-#define SEPARATOR	"/"
-#endif // _WIN32
-
 #if defined(unix) || defined(__unix__) || defined(__unix)
 #define UNIX_OS
 #endif
