@@ -3,6 +3,7 @@
 #include <filesystem>
 #include "global.h"
 #include "Configuration.h"
+#include <iostream>
 
 bool user_file_exists(std::string username);
 
