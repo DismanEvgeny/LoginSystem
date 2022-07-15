@@ -1,7 +1,14 @@
 #pragma once
 
 #include "io.h"
+#ifdef _WIN32
 #include <Windows.h>
+#endif // _WIN32
+#ifdef UNIX_OS
+#include <termios.h>
+#include <unistd.h>
+#endif // UNIX_OS
+
 
 int register_user();
 

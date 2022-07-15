@@ -47,6 +47,7 @@ bool check_password(string password) {
 }
 
 string get_password_from_user() {
+#ifdef _WIN32
 	HANDLE hStdInput
 		= GetStdHandle(STD_INPUT_HANDLE);
 	DWORD mode{ 0 };
@@ -60,14 +61,26 @@ string get_password_from_user() {
 	SetConsoleMode(
 		hStdInput,
 		mode & (~ENABLE_ECHO_INPUT));
+#endif // _WIN32
 
+#ifdef UNIX_OS
+	termios oldt;
+	tcgetattr(STDIN_FILENO, &oldt);
+	termios newt = oldt;
+	newt.c_lflag &= ~ECHO;
+	tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+#endif // UNIX_OS
+
+	
 	// Take input
 	string ipt{};
 	getline(cin, ipt);
 	cout << endl;
 
+#ifdef _WIN32
 	// Restore the mode
 	SetConsoleMode(hStdInput, mode);
+#endif
 
 	return ipt;
 }
