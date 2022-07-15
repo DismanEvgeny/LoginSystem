@@ -81,6 +81,15 @@ string get_password_from_user() {
 	// Restore the mode
 	SetConsoleMode(hStdInput, mode);
 #endif
+#ifdef UNIX_OS
+	tcgetattr(STDIN_FILENO, &oldt);
+	termios newt = oldt;
+
+	/* we want to reenable echo */
+	newt.c_lflag |= ECHO;
+
+	tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+#endif // UNIX_OS
 
 	return ipt;
 }
