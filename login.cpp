@@ -19,7 +19,7 @@ bool check_username(string username) {
 		cout << "Username must be longer than " << USERNAME_MIN_LENGTH << " and shorter than " << USERNAME_MAX_LENGTH << " characters\n";
 	}
 
-	if (user_exists(username)) {
+	if (user_exists(username) && !check) {
 		check = false;
 		cout << "User \"" << username << "\" exists\n";
 	}
@@ -83,12 +83,12 @@ string get_password_from_user() {
 #endif
 #ifdef UNIX_OS
 	tcgetattr(STDIN_FILENO, &oldt);
-	termios newt = oldt;
+	//termios newt = oldt;
 
 	/* we want to reenable echo */
-	newt.c_lflag |= ECHO;
+	oldt.c_lflag |= ECHO;
 
-	tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+	tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 #endif // UNIX_OS
 
 	return ipt;
