@@ -84,11 +84,11 @@ string get_password_from_user() {
 #endif
 
 #ifdef UNIX_OS
-	struct termios tty;
-	tcgetattr(STDIN_FILENO, &tty);
-	tty.c_lflag |= ECHO;
+	struct termios tty1;
+	tcgetattr(STDIN_FILENO, &tty1);
+	tty1.c_lflag |= ECHO;
 
-	(void)tcsetattr(STDIN_FILENO, TCSANOW, &tty);
+	(void)tcsetattr(STDIN_FILENO, TCSANOW, &tty1);
 #endif // UNIX_OS
 
 	return ipt;
