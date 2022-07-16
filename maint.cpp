@@ -81,7 +81,7 @@ int start() {
 			cout << "\t\tREGISTRATION\n";
 			rc = register_user();
 			if (rc != 0) {
-				result.assign("Registrtion failed. RC = " + rc);
+				result.assign("Registrtion failed. RC = ").append(to_string(rc));
 			}
 			else {
 				result.assign("Registrtion completed normally.");
