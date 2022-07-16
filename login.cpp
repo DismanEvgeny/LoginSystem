@@ -47,6 +47,7 @@ bool check_password(string password) {
 }
 
 string get_password_from_user() {
+	cout << "In get_password_from_user\n";
 #ifdef _WIN32
 	HANDLE hStdInput
 		= GetStdHandle(STD_INPUT_HANDLE);
@@ -63,8 +64,9 @@ string get_password_from_user() {
 		mode & (~ENABLE_ECHO_INPUT));
 #endif // _WIN32
 
-#ifdef UNIX_OS
 	cout << "disabling output\n";
+
+#ifdef UNIX_OS
 	termios tty;
 
 	tcgetattr(STDIN_FILENO, &tty);
