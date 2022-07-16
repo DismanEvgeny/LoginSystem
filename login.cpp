@@ -93,6 +93,7 @@ string get_password_from_user() {
 	tty.c_lflag |= ECHO;
 
 	tcsetattr(STDIN_FILENO, TCSANOW, &tty1);
+	cout << "Enabled output\n";
 #endif // UNIX_OS
 
 	return ipt;
