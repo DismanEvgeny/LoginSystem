@@ -47,7 +47,6 @@ bool check_password(string password) {
 }
 
 string get_password_from_user() {
-	cout << "In get_password_from_user\n";
 #ifdef _WIN32
 	HANDLE hStdInput
 		= GetStdHandle(STD_INPUT_HANDLE);
@@ -73,7 +72,6 @@ string get_password_from_user() {
 #endif // UNIX_OS
 
 	// Take input
-	cout << "Simple change\n";
 	string ipt{};
 	getline(cin, ipt);
 	cout << endl;
