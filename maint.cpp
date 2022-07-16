@@ -56,6 +56,8 @@ int start() {
 	bool quit{ false };
 	string result{};
 	int rc{};
+
+	clear_console();
 	cout << "___________________ Login System ___________________\n";
 	while (!quit) {
 		cout << "Login(L), Register(r) or Exit(e) ? : \t";
@@ -68,7 +70,7 @@ int start() {
 			cout << "\t\tLOGIN\n";
 			rc = login();
 			if (rc != 0) {
-				result.assign("Login failed. RC = " + rc);
+				result.assign("Login failed. RC = ").append(to_string(rc));
 			}
 			else {
 				result.assign("Login succeed!");
@@ -95,12 +97,12 @@ int start() {
 			quit = true;
 			break;
 		default:
-			cout << "! Only \'l\', \'r\' or \'e\'\n";
+			cout << "Only \'l\', \'r\' or \'e\'\n";
 			quit = false;
 			break;
 		}
 
-		cout << endl << result << endl << endl;
+		cout << result << endl << endl;
 
 
 	}
