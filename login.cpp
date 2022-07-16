@@ -71,7 +71,6 @@ string get_password_from_user() {
 	tcsetattr(STDIN_FILENO, TCSANOW, &newt);
 #endif // UNIX_OS
 
-	
 	// Take input
 	string ipt{};
 	getline(cin, ipt);
@@ -81,14 +80,15 @@ string get_password_from_user() {
 	// Restore the mode
 	SetConsoleMode(hStdInput, mode);
 #endif
+
 #ifdef UNIX_OS
-	tcgetattr(STDIN_FILENO, &oldt);
-	//termios newt = oldt;
-
+	termios oldt2{};
+	tcgetattr(STDIN_FILENO, &oldt2);
+	termios newt2{ oldt2 };
 	/* we want to reenable echo */
-	oldt.c_lflag |= ECHO;
+	newt2.c_lflag |= ECHO;
 
-	tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+	tcsetattr(STDIN_FILENO, TCSANOW, &newt2);
 #endif // UNIX_OS
 
 	return ipt;
@@ -184,6 +184,9 @@ int register_user(string username, string password)
 // check if user exists
 bool user_exists(string username)
 {
+	if (username == "")
+		return false;
+
 	bool exists{ user_file_exists(username) };
 
 	return exists;
