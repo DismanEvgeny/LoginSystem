@@ -48,6 +48,8 @@ bool check_password(string password) {
 
 string get_password_from_user() {
 #ifdef _WIN32
+	cout << "Windows. disabling output\n";
+
 	HANDLE hStdInput
 		= GetStdHandle(STD_INPUT_HANDLE);
 	DWORD mode{ 0 };
