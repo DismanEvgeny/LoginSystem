@@ -118,7 +118,7 @@ Configuration load_conf_file()
 
 void clear_console() {
 #ifdef UNIX_OS
-	cout << "\x1B[2J\x1B[H";
+	// cout << "\x1B[2J\x1B[H";
 #endif // UNIX_OS
 
 #ifdef _WIN32

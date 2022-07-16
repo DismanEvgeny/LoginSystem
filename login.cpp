@@ -5,7 +5,7 @@ using namespace std;
 
 bool check_username(string username) {
 	bool check{ true };
-	for  (auto ch : USERNAME_RESTRICTED_CHARS)
+	for (auto ch : USERNAME_RESTRICTED_CHARS)
 	{
 		if (username.find(ch) != std::string::npos) {
 			check = false;
@@ -64,18 +64,12 @@ string get_password_from_user() {
 		mode & (~ENABLE_ECHO_INPUT));
 #endif // _WIN32
 
-	cout << "disabling output\n";
-
 #ifdef UNIX_OS
-	termios tty;
-
+	struct termios tty;
 	tcgetattr(STDIN_FILENO, &tty);
-
-	/* we want to disable echo */
 	tty.c_lflag &= ~ECHO;
 
-	tcsetattr(STDIN_FILENO, TCSANOW, &tty);
-	cout << "output disabled\n";
+	(void)tcsetattr(STDIN_FILENO, TCSANOW, &tty);
 #endif // UNIX_OS
 
 	// Take input
@@ -90,16 +84,11 @@ string get_password_from_user() {
 #endif
 
 #ifdef UNIX_OS
-	cout << "enabling output\n";
-	termios tty1;
-
-	tcgetattr(STDIN_FILENO, &tty1);
-
-	/* we want to reenable echo */
+	struct termios tty;
+	tcgetattr(STDIN_FILENO, &tty);
 	tty.c_lflag |= ECHO;
 
-	tcsetattr(STDIN_FILENO, TCSANOW, &tty1);
-	cout << "Enabled output\n";
+	(void)tcsetattr(STDIN_FILENO, TCSANOW, &tty);
 #endif // UNIX_OS
 
 	return ipt;
@@ -116,7 +105,7 @@ bool compare_passwords(string username, string password) {
 int login()
 {
 	string username{}, password{};
-	bool success{false};
+	bool success{ false };
 	// int rc{ 0 };
 	cout << "Username:\t";
 	getline(cin, username);
@@ -146,8 +135,8 @@ int login()
 int register_user()
 {
 	string username{}, password{}, password_for_check{};
-	bool check{false};
-	int rc{0};
+	bool check{ false };
+	int rc{ 0 };
 
 	// Get username from input + check it
 	while (!check)
