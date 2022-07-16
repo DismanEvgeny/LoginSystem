@@ -64,11 +64,14 @@ string get_password_from_user() {
 #endif // _WIN32
 
 #ifdef UNIX_OS
-	termios oldt;
-	tcgetattr(STDIN_FILENO, &oldt);
-	termios newt = oldt;
-	newt.c_lflag &= ~ECHO;
-	tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+	termios tty;
+
+	tcgetattr(STDIN_FILENO, &tty);
+
+	/* we want to disable echo */
+	tty.c_lflag &= ~ECHO;
+
+	tcsetattr(STDIN_FILENO, TCSANOW, &tty);
 #endif // UNIX_OS
 
 	// Take input
@@ -82,13 +85,14 @@ string get_password_from_user() {
 #endif
 
 #ifdef UNIX_OS
-	termios oldt2{};
-	tcgetattr(STDIN_FILENO, &oldt2);
-	termios newt2{ oldt2 };
-	/* we want to reenable echo */
-	newt2.c_lflag |= ECHO;
+	termios tty1;
 
-	tcsetattr(STDIN_FILENO, TCSANOW, &newt2);
+	tcgetattr(STDIN_FILENO, &tty1);
+
+	/* we want to reenable echo */
+	tty.c_lflag |= ECHO;
+
+	tcsetattr(STDIN_FILENO, TCSANOW, &tty1);
 #endif // UNIX_OS
 
 	return ipt;
