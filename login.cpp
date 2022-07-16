@@ -48,8 +48,6 @@ bool check_password(string password) {
 
 string get_password_from_user() {
 #ifdef _WIN32
-	cout << "Windows. disabling output\n";
-
 	HANDLE hStdInput
 		= GetStdHandle(STD_INPUT_HANDLE);
 	DWORD mode{ 0 };
@@ -65,18 +63,18 @@ string get_password_from_user() {
 		mode & (~ENABLE_ECHO_INPUT));
 #endif // _WIN32
 
-#ifdef UNIX_OS
-	cout << "disabling output\n";
-	termios tty;
-
-	tcgetattr(STDIN_FILENO, &tty);
-
-	/* we want to disable echo */
-	tty.c_lflag &= ~ECHO;
-
-	tcsetattr(STDIN_FILENO, TCSANOW, &tty);
-	cout << "output disabled\n";
-#endif // UNIX_OS
+//#ifdef UNIX_OS
+//	cout << "disabling output\n";
+//	termios tty;
+//
+//	tcgetattr(STDIN_FILENO, &tty);
+//
+//	/* we want to disable echo */
+//	tty.c_lflag &= ~ECHO;
+//
+//	tcsetattr(STDIN_FILENO, TCSANOW, &tty);
+//	cout << "output disabled\n";
+//#endif // UNIX_OS
 
 	// Take input
 	string ipt{};
@@ -88,18 +86,18 @@ string get_password_from_user() {
 	SetConsoleMode(hStdInput, mode);
 #endif
 
-#ifdef UNIX_OS
-	cout << "enabling output\n";
-	termios tty1;
-
-	tcgetattr(STDIN_FILENO, &tty1);
-
-	/* we want to reenable echo */
-	tty.c_lflag |= ECHO;
-
-	tcsetattr(STDIN_FILENO, TCSANOW, &tty1);
-	cout << "Enabled output\n";
-#endif // UNIX_OS
+//#ifdef UNIX_OS
+//	cout << "enabling output\n";
+//	termios tty1;
+//
+//	tcgetattr(STDIN_FILENO, &tty1);
+//
+//	/* we want to reenable echo */
+//	tty.c_lflag |= ECHO;
+//
+//	tcsetattr(STDIN_FILENO, TCSANOW, &tty1);
+//	cout << "Enabled output\n";
+//#endif // UNIX_OS
 
 	return ipt;
 }
