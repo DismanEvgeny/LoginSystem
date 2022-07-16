@@ -77,6 +77,7 @@ string get_password_from_user() {
 //#endif // UNIX_OS
 
 	// Take input
+	cout << "Simple change\n";
 	string ipt{};
 	getline(cin, ipt);
 	cout << endl;
